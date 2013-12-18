@@ -56,3 +56,7 @@ The Google Apps admin interface is not done yet. It switches back and forth betw
 ## Conclusion:
 
 App Engine for PHP seems awesome if you develop specifically for it and if you are fine with going on purpose into vendor lock-in. For other situations also consider the alternatives (shared hosting, virtual machines, etc.).
+
+#### Update 1 (18 Dec 2013):
+
+I figured out how much it costs to run the smallest setup for hosting WordPress. **For the past month the cost was $15.25** in total from which the Google SQL D0 Service was ~$15. I didn't make any requests to the site after testing it initially but CloudSQL charged me for ~75% of the hours because every few hours there were some read and write openration. Also, in the logs there are a few unknown errors associated with backups.
