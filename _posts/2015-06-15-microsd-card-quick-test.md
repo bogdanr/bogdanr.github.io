@@ -22,7 +22,6 @@ The tests were run multiple times and the average was considered. It was proven 
 
 ## Results
 
-{: .table .table-hover}
 Lexar 633x | Sony    | Kingston Class 10 | Kingston Class 4
 ---------- | ------- | ----------------- | ----------------
 40 MB/s    | 17 MB/s | 9.5 MB/s          | 3.5 MB/s

@@ -7,7 +7,7 @@ tags: [Cloud, Google, PHP, App Engine]
 ---
 {% include JB/setup %}
 
-![PHP App Engine]({{ site.url }}/assets/img/google-appengine-php.gif){.right}
+![PHP App Engine]({{ site.url }}/assets/img/google-appengine-php.gif)
 
 You can host your PHP apps on the Google infrastructure and only pay according to how popular your app is.
 
