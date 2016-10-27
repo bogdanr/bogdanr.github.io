@@ -5,15 +5,17 @@ description: "This is a quick test with the write speed of some MicroSD cards"
 category: "gadgets"
 tags: [MicroSD, action cam, benchmark, dd]
 ---
-{% include JB/setup %}
+
+MicroSD cards are everywhere these days but since these days it's possible to film in UHD or in high speed with action cameras and phones it's actually very important how quick these cards are at writing this data.
 
 ![MicroSD card]({{ site.url }}/assets/img/microsd-cards.png)
 
-MicroSD cards are everywhere these days but since these days it's possible to film in UHD or in high speed with action cameras and phones it's actually very important how quick these cards are at writing this data. Of course these cards could also be used as storage for all those boards which run Linux, such as the well known Raspberry Pi but in this case a durability test would be just as important as a speed test.
+Of course these cards could also be used as storage for all those boards which run Linux, such as the well known Raspberry Pi but in this case a durability test would be just as important as a speed test.
 
 ## Method
 
 I took four of the MicroSD cards which I found in the house and which could be easily found in stores. I was only interested in the write speed to card so I used dd to dump data to the card.
+
 `dd if=/dev/zero of=/root/card/testfile bs=1M count=1024 oflag=direct`
 
 The card was tested in the SD/MMC port on the laptop, with a fast card reader in USB 2.0 and in USB 3.0. The last option was significantly faster so I used the card reader in a USB 3.0 port for all the tests.

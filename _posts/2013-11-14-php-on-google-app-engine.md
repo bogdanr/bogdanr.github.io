@@ -5,11 +5,10 @@ description: "Google App Engine for PHP but not for everybody"
 category: "Cloud"
 tags: [Cloud, Google, PHP, App Engine]
 ---
-{% include JB/setup %}
+
+You can host your PHP apps on the Google infrastructure and only pay according to how popular your app is. Let's see how it actually works.
 
 ![PHP App Engine]({{ site.url }}/assets/img/google-appengine-php.gif)
-
-You can host your PHP apps on the Google infrastructure and only pay according to how popular your app is.
 
 This sounds super nice, specially since it can even be free of charge for personal websites or provide automatic scalability for sites which plan to attract a lot of traffic.
 

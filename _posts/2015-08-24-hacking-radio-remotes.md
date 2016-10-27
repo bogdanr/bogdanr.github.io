@@ -5,12 +5,13 @@ description: "This will be a quick tutorial about reverse engineering cheap wire
 category: "electronics"
 tags: [wireless, remote, arduino, hack, SDR]
 ---
-{% include JB/setup %}
+
+Cheap wireless remotes are everywhere and the purpose of this article is to learn how most of them work, how secure they are and how to create your own in order to clone or extend an existing remote.
 
 ![RF Remotes]({{ site.url }}/assets/img/rf_remotes.jpg)
 
 <img src="/assets/img/ws2811_remote.jpg" style="float: right; height: 200px"/>
-Cheap wireless remotes are everywhere and the purpose of this article is to learn how most of them work, how secure they are and how to create your own in order to clone or extend an existing remote. The kind of remotes we are talking about are usually used for controlling lights, opening garage doors or gates, controlling thermostats or any other general purpose application. I hope in 2020 this article will be obsolete but in 2015 it works for 90% of the remotes.
+The kind of remotes we are talking about are usually used for controlling lights, opening garage doors or gates, controlling thermostats or any other general purpose application. I hope in 2020 this article will be obsolete but in 2015 it works for 90% of the remotes.
 
 The remote we'll use here comes from a pretty new product class, the RGB LED controllers for individually addressable WS8211 LEDs. My intuition tells me that in a few years more people are going to use these but let's hope I'm wrong.
 
