@@ -10,8 +10,7 @@ Ocasionally publish technology related content either in the form of howtos, rev
 
     git clone git@github.com:bogdanr/bogdanr.github.io.git
     cd bogdanr.github.io
-    gem install jekyll
-    gem install pygments.rb
+    gem install github-pages
 
 ## How to use it
 
@@ -19,7 +18,4 @@ Build page and start local web server
 
     jekyll serve
 
-Build page into `_site` folder
-
-    jekyll build
 

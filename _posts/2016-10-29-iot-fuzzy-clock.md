@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Precise Fuzzy Clock"
+title: "IoT Fuzzy Clock"
 description: "Making a very precise clock that will be read with a large margin of error"
 category: "DIY"
 tags: [DIY, ESP8266, NTP, WS8211, clock]
@@ -8,9 +8,11 @@ tags: [DIY, ESP8266, NTP, WS8211, clock]
 
 Let's see how to make a very precise clock that will be read with a large margin of error. It should be easy for the technically inclined and it can also be fun.
 
+<video src="/assets/img/FuzzyClock-timelapse.webm" type="video/webm" width="770" controls autoplay loop></video>
 
+The purpose is to introduce some very versatile and yet cheap building blocks in the most straightforward way possible. It was written for beginners and it explains a bunch of things from scratch.
 
-The purpose is to introduce some very versatile and yet cheap building blocks in the most straightforward way possible. It was written for beginners and it explains a bunch of things from scratch. 
+Above you can see the green LED is the minute, the red one is the hour and the blue one indicates atmospheric pressure. It's a 12 hour clock and in the time lapse it goes from ~ 5:10 to 6:50 PM. When the blue LED is close to the left there is a small chance of rain and when it's close to the right there is a significant chance of rain. 
 
 ## BOM (Bill of materials)
 
@@ -61,6 +63,8 @@ For this project I plan to use only one color at a time and to change it every m
 
 Also add a small resistor (less than 1K) between GPIO16 and REST. This will bring the micro back to life then it's done sleeping.
 
+![WS2812 die]({{ site.url }}/assets/img/FuzzyClockBoard.jpg)
+
 ## Software
 
 ESP8266 works with quite a few different SDKs so it can be programmed using different languages. MicroPython is very nice if you like Python, NodeMCU for Lua, Arduino for C++ and there is even a firmware for BASIC. I played with all these and personally I prefer Arduino because it has libraries for almost everything. I also read the documentation for mongoose-iot but as of 2016 it's just getting started. It also looks interesting but time will tell if it's going to be an enterprise product or for everybody.
@@ -85,7 +89,7 @@ The big picture is:
 
 + We import libraries
   + ESP8266WiFi makes it easy to connect to WiFi and go to sleep
-  + NTPtimeESP is an extension of the Arduino NTP library that gets us nicely formatted data and saves some us the trouble of figuring daylight saving
+  + NTPtimeESP is an extension that gets us nicely formatted time 
   + Adafruit_NeoPixel makes it easy to work with WS2812B LEDs
   + ArduinoJson helps us handle the JSON data that we get from an external API
 + We define a bunch of constants and variables
@@ -93,7 +97,7 @@ The big picture is:
 + Some functions are defined to make it a bit more readable
   + WUAPI connects to api.wunderground.com to get the barometric pressure for our city
   + showWeather formats the JSON weather data
-  + getShowData retrieves data from NTP, calculates the position of the LEDs and lights them up. Yeah, this one is not very well structured but it is late and I want to finish this post. :sleepy:
+  + getShowData retrieves data from NTP, calculates the position of the LEDs and lights them up. Yeah, this one is not very well structured but it is late and I want to finish this post.
 
 <script src="https://gist.github.com/bogdanr/4e94e1d66e94aafd76a395677d022015.js"></script>
 

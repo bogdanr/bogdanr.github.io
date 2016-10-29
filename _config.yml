@@ -2,10 +2,12 @@ name: Bogdan's Ramblings
 description: Technology blog
 meta_description: "Bogdan's Ramblings; Technology blog"
 
-markdown: redcarpet
-redcarpet:
-  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
-highlighter: pygments
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+
 logo: false
 paginate: 15
 baseurl: /
