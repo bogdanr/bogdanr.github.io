@@ -29,7 +29,6 @@ The more current you draw from C2 the more ripple you'll observe. The frequency 
 For powering OpAmps this is clearly not ideal because charge pumps are switching devices which, of course, have ripple on the output. On the other hand, OpAmps have a [PSRR](https://en.wikipedia.org/wiki/Power_supply_rejection_ratio) (power supply rejection ratio) which define how much of the noise from the power supply will end up in the output of the OpAmp.
 
 In the image below we have a generic graph for PSRR.
-
 ![charge pump]({{ site.url }}/assets/img/PSRR.png)
 
 This essentially tells us that at 10kHz the rejection of noise from the negative supply is ~ 105 dB. This means that if you have 10 kHz ripple on the negative supply, the noise would be 0.000005 of the audio signal. Even if we amplify the signal 10x it's still going to be great. Nevertheless, this is OP4177 which has a great PSRR. For many other OpAmps we don't even have this data in the datasheet so we just need to do some tests and see for ourselves.
@@ -119,4 +118,7 @@ That's more like it! LTC1144 is the only decent charge pump for this job. With 1
 + Charge pumps could be a very decent option where low power is required.
 + LTC1144 is significantly more expensive than the bunch that was tested but it's performance is much better.
 
-Unfortunately I think I need 3 times more current than these can deliver for driving headphones decently. Even though I could parallel more charge pumps ICs, I will also consider LT1054. If that doesn't work perhaps I will have to consider a switching power supply with an inductor.
+One thing that was brought to my attention is that I didn't mention the voltage drop is huge with our 100 Ohm load. After we account for the output resistance in our IC, **if we put 8V in, we will get -3.3V out**.
+
+Unfortunately I think I need a few times more current than these can deliver for driving headphones decently. Even though I could parallel more charge pumps ICs, I will also consider LT1054. If that doesn't work perhaps I will have to consider a switching power supply with an inductor.
+
