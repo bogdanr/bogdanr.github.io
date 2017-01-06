@@ -24,6 +24,7 @@ Thus, the chosen instance size was 8G RAM and 4 vCPUs and the vendors are:
 + Google Compute Engine
 + Digital Ocean
 + Linode
++ Scaleway
 
 We will test, CPU, Disk IO, memory and network bandwidth.
 
@@ -35,7 +36,7 @@ All tests would be done on Debian 8 because it has fairly recent tooling and itâ
 
 #### Disk
 
-All the instances had 100G SSD attached.
+All the instances had 100G SSD attached. Performance will vary significantly here because they use different technologies.
 
 ##### Random RW
 `fio --ioengine=libaio --direct=1 --bs=4k --iodepth=64 --size=5G --rw=randrw --gtod_reduce=1 --name=rw`
@@ -72,15 +73,18 @@ These tests should be repeated a few hours apart to determine observe if the CPU
 ![MySQL Performance]({{ site.url }}/assets/img/cloud-performance/MySQL.png)
 ![Internal Network Speed]({{ site.url }}/assets/img/cloud-performance/Network.png)
 ![IO Performance]({{ site.url }}/assets/img/cloud-performance/IOperformance.png)
+![RAM Performance]({{ site.url }}/assets/img/cloud-performance/RAM.png)
 ![Cost]({{ site.url }}/assets/img/cloud-performance/Cost.png)
 
 ##### Notes:
 
 Amazon and Google both limit IO performance according to disk size. They both can perform very well with way more expensive storage.
+Scaleway offers a very interesting cloud offering with both physical and virtual servers. I tested both and each one is OK for a different job.
 
 ## Conclusions:
 
 + There is a huge difference in the cloud offering.
 + Compute at Amazon is very expensive compared with others.
-+ Out of these 4 vendors Linode is by far the cheapest as of January 2017.
-
++ I chose Linode in this case because peformance is really good at it's price point.
++ Out of these 5 vendors Scaleway seems the cheapest as of January 2017, but it depends on what do you need. To achive such a low cost they use commodity hardware with Atom CPUs but that is fine since it's reflected in the price.
++ Remember that in the cloud, CPUs, RAM, disks are not created equal.
