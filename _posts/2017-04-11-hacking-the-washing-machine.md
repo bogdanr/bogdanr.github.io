@@ -51,6 +51,10 @@ After some testing with the ESP8266 disconnected I procedded to solder it in and
 ![Indesit Moon hack]({{ site.url }}/assets/img/Indesit-sixl-cb2.jpg)
 ![Indesit Moon hack installed]({{ site.url }}/assets/img/Indesit-sixl-cb3.jpg)
 
+... and the Android app looks like this:
+
+![Blynk washing machine]({{ site.url }}/assets/img/Indesit-sixl-app.gif)
+
 ### Step 3 - Enjoy 
 
 To me, this is still the best washing machine because I don't have to buy a new one :)
