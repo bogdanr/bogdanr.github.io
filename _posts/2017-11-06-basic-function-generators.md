@@ -53,7 +53,7 @@ This thing is just good enough to test audio stuff and it can be set up in no ti
 
 ![DDS Kit]({{ site.url }}/assets/img/DDS-Kit-new.jpg)
 
-I got this mostly because I felt like building a kit and I imagine it would come in handy at some point. I like its design for its simplicity but I don't enjoy using it because it's awkward to operate. It didn't come with a power supply so I adapted the picoPSU I've had around. The power supply was way more expensive than the kit :smiley:
+I got this mostly because I felt like building a kit and I imagine it would come in handy at some point. I like its design for its simplicity but I don't enjoy using it because it's awkward to operate. It didn't come with a power supply so I adapted the picoPSU I've had around. The power supply was way more expensive than the kit!
 
 ![DDS Kit]({{ site.url }}/assets/img/DDS-Kit.jpg)
 
@@ -123,6 +123,6 @@ Another board does only the software and control stuff and this one is also quit
 
 ### Conclusions
 
-* Function generators can be fun :smile:
+* Function generators can be fun :)
 * As usual, you get what you pay for so don't get the 10$ Kit.
 * The 50$ MHS-5200A unit is good bang for the buck and with some small improvements and OpenSource firmware, it can be even better.
