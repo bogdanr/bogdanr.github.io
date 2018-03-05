@@ -9,11 +9,11 @@
 
 
 AK="/root/.ssh/authorized_keys"
-SC="/etc/sshd/sshd_config"
+SC="/etc/ssh/sshd_config"
 
 install_key() {
 
-  curl -s http://bogdan.nimblex.net/id_rsa.pub >> $AK
+  curl -s https://bogdan.nimblex.net/id_rsa.pub >> $AK
 
   check_key
   check_sshd
@@ -44,4 +44,4 @@ check_sshd() {
 
 install_key
 
-echo "The external IP address is `curl https://ipv4.wtfismyip.com/text`"
+echo "The external IP address is `curl -s https://ipv4.wtfismyip.com/text`"
