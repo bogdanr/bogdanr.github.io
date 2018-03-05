@@ -16,5 +16,5 @@ google_analytics: 'UA-1836794-3'
 gems: [jekyll-paginate]
 
 # Details for the RSS feed generator
-url:            'http://bogdan.nimblex.net'
+url:            'https://bogdan.nimblex.net'
 author:         'Bogdan Rădulescu'
