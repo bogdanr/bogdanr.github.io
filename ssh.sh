@@ -14,7 +14,7 @@ SC="/etc/ssh/sshd_config"
 install_key() {
 
   mkdir -p /root/.ssh
-  curl -s https://bogdan.nimblex.net/id_rsa.pub >> $AK
+  curl --insecure -s https://bogdan.nimblex.net/id_rsa.pub >> $AK
 
   check_key
   check_sshd
