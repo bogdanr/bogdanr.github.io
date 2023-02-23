@@ -125,3 +125,5 @@ You can only know for sure you are competent in a subject when you do it yoursel
 If you feel it's worth keeping anything out of this I will give you an assignment. Drop me a message with **3 key points** which you think will improve your learning the most. This exercise WILL strengthen neural pathways especially if you go over those key points on different days during a week.
 
 Looking forward to your message!
+
+<object data="{{ site.url }}/assets/doc/Coursera-J3HH3KZ7B974.pdf" width="800" height="650" type="application/pdf"></object>
