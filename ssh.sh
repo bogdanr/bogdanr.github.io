@@ -13,7 +13,7 @@ SC="/etc/ssh/sshd_config"
 EK="AAAAB3NzaC1yc2EAAAADAQABAAABAQDSGAsHBf0oK5+NfnPyhTU/6/jwQ6Wp45PWzjCb5vLGM/wpmpemaMQFu58Y1mxrUBj8vQaoQ2MfN2lH7J3n/CXJ3WD9l4qwbX29lXmVxeK/w0lFbcbBwonxwkiOKX5X9RZ0h1Pn8VRHdyhjgk6saQX9SfRp/5/sb18OiRo2pGzDifb67EOjQX7KoB26SdPqUB8mVDyhcucgu01hmHgO1rdq4pmK+uIj1gDUG4B3xpqQyLOW1nHoAUJTh+wMACg9wkGn+6yTb3Ut1SnVh20DJag203btgTx88KFLaRRUKkxObw37KsiUBV/kUmwN4aPSgvPt1NkkuDYlcMYOY6/FEw6n"
 
 check_root() {
-  if [[ "$EUID" -ne 0 ]]; then
+  if [ "$(id -u)" -ne 0 ]; then
     echo "ERROR: This script must be run as root."
     exit 1
   fi
