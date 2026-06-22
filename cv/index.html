@@ -10,7 +10,7 @@
   <meta name="author" content="Bogdan R&#259dulescu - nimblex.net">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700italic,700' rel='stylesheet' type='text/css'>
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="styles.css">
 
@@ -18,6 +18,81 @@
   <!-- Modernizr on top to enable old browsers to render HTML5 markup -->
   <script src="modernizr.custom.94828.js"></script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ProfilePage",
+        "@id": "https://bogdan.nimblex.net/cv/#webpage",
+        "url": "https://bogdan.nimblex.net/cv/",
+        "name": "Bogdan R\u0103dulescu - Curriculum Vitae",
+        "inLanguage": "en",
+        "isPartOf": { "@id": "https://bogdan.nimblex.net/#website" },
+        "mainEntity": { "@id": "https://bogdan.nimblex.net/#person" },
+        "breadcrumb": { "@id": "https://bogdan.nimblex.net/cv/#breadcrumb" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://bogdan.nimblex.net/#person",
+        "name": "Bogdan R\u0103dulescu",
+        "url": "https://bogdan.nimblex.net/",
+        "image": "https://bogdan.nimblex.net/cv/BR_cv.png",
+        "jobTitle": "Linux Consultant",
+        "description": "Linux professional and DevOps engineer with over a decade of experience building and operating scalable, high-traffic infrastructures.",
+        "email": "mailto:bogdan@nimblex.net",
+        "telephone": "+40723372866",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Bucharest",
+          "addressCountry": "RO"
+        },
+        "knowsAbout": [
+          "Linux",
+          "NimbleX",
+          "Systems Administration",
+          "DevOps",
+          "Cloud Computing",
+          "Amazon Web Services",
+          "Kubernetes",
+          "Docker",
+          "Terraform",
+          "Ansible",
+          "Rust",
+          "Configuration Management",
+          "Networking",
+          "High Availability",
+          "Performance Tuning"
+        ],
+        "alumniOf": {
+          "@type": "CollegeOrUniversity",
+          "name": "University Politehnica Bucharest"
+        },
+        "hasCredential": [
+          { "@type": "EducationalOccupationalCredential", "name": "Kubernetes (LFS258)" },
+          { "@type": "EducationalOccupationalCredential", "name": "SaltStack Certified Engineer" },
+          { "@type": "EducationalOccupationalCredential", "name": "AWS Business Professional" },
+          { "@type": "EducationalOccupationalCredential", "name": "AWS Technical Professional" },
+          { "@type": "EducationalOccupationalCredential", "name": "M102: MongoDB for DBAs" },
+          { "@type": "EducationalOccupationalCredential", "name": "Linux Systems Administrator" }
+        ],
+        "sameAs": [
+          "https://ro.linkedin.com/in/bogdanr",
+          "https://github.com/bogdanr",
+          "https://www.nimblex.net"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://bogdan.nimblex.net/cv/#breadcrumb",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://bogdan.nimblex.net/" },
+          { "@type": "ListItem", "position": 2, "name": "Curriculum Vitae", "item": "https://bogdan.nimblex.net/cv/" }
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -28,10 +103,9 @@
     	<ul class="contact">
 		<li><i class="fa fa-envelope-o"></i> bogdan@nimblex.net</li>
 		<li><i class="fa fa-phone"></i> +40723372866</li>
-		<li><i class="fa fa-skype"></i> <a href="skype:bogdan_radulescu99?chat&topic=Contacted%20from%20CV">bogdan_radulescu99</a></li>
-		<li><i class="fa fa-link"></i> <a href="http://www.nimblex.net" title="Bogdan Radulescu Hoby Site" target="_blank">www.nimblex.net</a></li>
-		<li><i class="fa fa-map-marker"></i> <a class="map-tooltip" href="#">Bucharest, Romania<span><img src="http://maps.googleapis.com/maps/api/staticmap?center=Drumul+Valea+Danului,Bucharest,Romania&zoom=14&size=600x300&sensor=false" style="float:right;" alt="Address Map"></span></li></a>
-		<li><i class="fa fa-linkedin"></i> <a href="http://ro.linkedin.com/in/bogdanr" title="LinkedIn Profile" target="_blank">bogdanr</a></li>
+		<li><i class="fa fa-link"></i> <a href="https://www.nimblex.net" title="Bogdan Radulescu Hobby Site" target="_blank">www.nimblex.net</a></li>
+		<li><i class="fa fa-map-marker"></i> Bucharest, Romania</li>
+		<li><i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/bogdanr" title="LinkedIn Profile" target="_blank">bogdanr</a></li>
 	</ul>
     </header>
 
@@ -61,22 +135,27 @@
             <dd title="">Power management</dd>
 
 	<dt>Systems Administration</dt>
-	    <dd title=""><b>Configuration Management</b> (Puppet, SaltStack)</dd>
+	    <dd title=""><b>Configuration Management</b> (Ansible, Puppet, SaltStack)</dd>
 	    <dd title=""><b>Databases</b> (MySQL, PostgreSQL, MongoDB, Redis, Vertica)</dd>
-	    <dd title=""><b>Web Serveres</b> (NGINX, Apache)</dd>
+	    <dd title=""><b>Web Servers</b> (NGINX, Apache)</dd>
 	    <dd title=""><b>Mail Servers</b> (Sendmail, Postfix)</dd>
-	    <dd title=""><b>Monitoring</b> (Collectd, Nagios, rsyslog, SNMP, Prometheus)</dd>
+	    <dd title=""><b>Monitoring</b> (Prometheus, Grafana, Loki, OpenTelemetry, Collectd, Nagios, rsyslog, SNMP)</dd>
 	    <dd title="Virtual Private Network"><b>VPN</b> (OpenVPN, IPsec, WireGuard)</dd>
 	    <dd title="">Virtualization</dd>
 	    <dd title="">Docker</dd>
+	    <dd title="">Helm</dd>
 	    <dd title="">Varnish</dd>
 	    <dd title="">Proxmox</dd>
+
+	<dt>Infrastructure as Code</dt>
+	    <dd title="">Terraform</dd>
+	    <dd title="">OpenTofu</dd>
 
 	<dt>Cloud Providers</dt>
 	    <dd title="Amazon Web Services">AWS</dd>
 	    <dd title="Google Compute Engine">GCE</dd>
 	    <dd title="">Azure</dd>
-	    <dd title="">ScaleAway</dd>
+	    <dd title="">Scaleway</dd>
 	    <dd title="">Linode</dd>
 	    <dd title="">Rackspace</dd>
 	    <dd title="">Digital Ocean</dd>
@@ -103,12 +182,15 @@
 	    <dd title="">ECR</dd>
 
 	<dt>CI / CD</dt>
+	    <dd title="">GitHub Actions</dd>
+	    <dd title="">ArgoCD</dd>
 	    <dd title="">Jenkins</dd>
 	    <dd title="">Travis CI</dd>
 	    <dd title="">GitLab CI</dd>
 	    <dd title="">TeamCity</dd>
 
 	<dt>Others</dt>
+	    <dd title="">Rust</dd>
 	    <dd title="">Git</dd>
 	    <dd title="PHP: Hypertext Preprocessor">PHP</dd>
 	    <dd title="Hyper Text Markup Language">HTML5</dd>
@@ -128,11 +210,11 @@
 	    <dd title="">Glance</dd>
 
 	<dt>Soft Skills</dt>
-	    <dd title="I am capable to addapt the changing needs of the organization especially becase I have a passion for learning and I understand that these days various concepts morph constantly.">Adaptable</dd>
+	    <dd title="I am capable to adapt to the changing needs of the organization especially because I have a passion for learning and I understand that these days various concepts morph constantly.">Adaptable</dd>
 	    <dd title="">Attention to detail</dd>
 	    <dd title="">Coaching</dd>
 	    <dd title="">Communicative</dd>
-	    <dd title="I am able to apply a resoning process for drawing correct conclusions from the available information by incorporating passion and creativity, but guided with discipline, practicality and common sense.">Critical Thinking</dd>
+	    <dd title="I am able to apply a reasoning process for drawing correct conclusions from the available information by incorporating passion and creativity, but guided with discipline, practicality and common sense.">Critical Thinking</dd>
 	    <dd title="">Efficient</dd>
 	    <dd title="">Enthusiastic</dd>
 	    <dd title="">Professional</dd>
@@ -144,7 +226,7 @@
     <section id="experience">
     	<h1>Work Experience</h1>
         <article>
-        	<h1><a href="http://bogdan.nimblex.net" title="Bogdan's Blog">Linux consultant</a> <span>International</span></h1>
+        	<h1><a href="https://bogdan.nimblex.net" title="Bogdan's Blog">Linux consultant</a> <span>International</span></h1>
             <time datetime="2016-06-01" class="start">May 2016</time>
             <time class="end">Present</time>
 	    <p>
@@ -153,18 +235,18 @@
             </p>
         </article>
         <article>
-        	<h1><a href="http://www.fusionappliances.com" title="Fusion Appliances">Fusion Appliances Ltd.</a> <span>Bucharest/Romania</span></h1>
+        	<h1><a href="https://www.fusionappliances.com" title="Fusion Appliances">Fusion Appliances Ltd.</a> <span>Bucharest/Romania</span></h1>
             <h2>Co-founder</h2>
             <time datetime="2011-07-01" class="start">July 2011</time>
             <time datetime="2016-07-15" class="end">July 2016</time>
 	    <p>
 	    I co-founded Fusion Appliances because we identified the need for high performance, easy to use devices that are quick to set up and which should resolve problems for a huge range of customers. Like with any small startup my role was divided into several fields. My responsibilities included developing the Linux distro (firmware) for our 3 devices, communication with the Chinese hardware manufacturer, handling various administrative aspects and creating the website.<br>
 	    The appliances are using a heavily patched kernel, in order to handle routing functionality, network buffers and CPU scheduling differently than the stock kernel and to allow them to be 100% resistant to power cuts.<br>
-	    We had an excellent time to market of just 3 months and managed to deliver a first few units which worked as expect from the first release.
+	    We had an excellent time to market of just 3 months and managed to deliver a first few units which worked as expected from the first release.
             </p>
         </article>
         <article>
-        	<h1><a href="http://www.erepublik.com" title="eRepublik Labs">eRepublik Labs Ltd.</a> <span>Bucharest/Romania</span></h1>
+        	<h1><a href="https://www.erepublik.com" title="eRepublik Labs">eRepublik Labs Ltd.</a> <span>Bucharest/Romania</span></h1>
             <h2>DevOps Engineer</h2>
             <time datetime="2010-04-01" class="start">April 2010</time>
             <time class="end">Present</time>
@@ -189,7 +271,7 @@
             </p>
         </article>
         <article>
-        	<h1><a href="http://www.avantajconsulting.ro" title="Avantaj Consulting">Avantaj Consulting</a> <span>Bucharest/Romania</span></h1>
+        	<h1><a href="https://www.avantajconsulting.ro" title="Avantaj Consulting">Avantaj Consulting</a> <span>Bucharest/Romania</span></h1>
             <h2>Linux Trainer</h2>
             <time datetime="2009-08-01" class="start">August 2009</time>
             <time datetime="2016-09-01" class="end">August 2016</time>

@@ -1,0 +1,72 @@
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}/",
+      "name": {{ site.name | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "inLanguage": "en",
+      "publisher": { "@id": "{{ site.url }}/#person" }
+    },
+    {
+      "@type": "Person",
+      "@id": "{{ site.url }}/#person",
+      "name": {{ site.author | jsonify }},
+      "url": "{{ site.url }}/",
+      "image": "{{ site.url }}/assets/img/profile.png",
+      "jobTitle": "Linux Consultant",
+      "sameAs": [
+        "https://ro.linkedin.com/in/bogdanr",
+        "https://github.com/bogdanr",
+        "https://www.nimblex.net"
+      ]
+    }{% if page.layout == "post" %},
+    {
+      "@type": "BlogPosting",
+      "@id": "{{ site.url }}{{ page.url }}#blogposting",
+      "url": "{{ site.url }}{{ page.url }}",
+      "mainEntityOfPage": "{{ site.url }}{{ page.url }}",
+      "isPartOf": { "@id": "{{ site.url }}/#blog" },
+      "headline": {{ page.title | jsonify }},
+      {% if page.description %}"description": {{ page.description | jsonify }},
+      {% endif %}"inLanguage": "en",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.date | date_to_xmlschema }}",
+      "author": { "@id": "{{ site.url }}/#person" },
+      "publisher": { "@id": "{{ site.url }}/#person" }{% if page.category %},
+      "articleSection": {{ page.category | jsonify }}{% endif %}{% if page.tags %},
+      "keywords": {{ page.tags | join: ", " | jsonify }}{% endif %}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ site.url }}{{ page.url }}#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "{{ site.url }}/" },
+        { "@type": "ListItem", "position": 2, "name": {{ page.title | jsonify }}, "item": "{{ site.url }}{{ page.url }}" }
+      ]
+    }{% elsif page.layout == "page" %},
+    {
+      "@type": "ProfilePage",
+      "@id": "{{ site.url }}{{ page.url }}#webpage",
+      "url": "{{ site.url }}{{ page.url }}",
+      "name": {{ page.title | jsonify }},
+      "isPartOf": { "@id": "{{ site.url }}/#website" },
+      "inLanguage": "en",
+      "mainEntity": { "@id": "{{ site.url }}/#person" }
+    }{% else %},
+    {
+      "@type": "Blog",
+      "@id": "{{ site.url }}/#blog",
+      "url": "{{ site.url }}/",
+      "name": {{ site.name | jsonify }},
+      "description": {{ site.description | jsonify }},
+      "inLanguage": "en",
+      "isPartOf": { "@id": "{{ site.url }}/#website" },
+      "publisher": { "@id": "{{ site.url }}/#person" }
+    }{% endif %}
+  ]
+}
+</script>

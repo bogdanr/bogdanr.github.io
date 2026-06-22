@@ -9,10 +9,10 @@ tags: [Rust, LLM, llama.cpp, Performance, Fono]
 I built a tool called [Fono](https://github.com/bogdanr/fono). It's a voice front-end for your computer that can run entirely on your own machine. No cloud, no account, no audio leaving the laptop. It has three jobs, on two hotkeys:
 
 - **Hold F7 to dictate** and cleaned-up text lands in whatever window you were typing in.
-- **Hold F8 to talk to an assistant** and it answers various thinkgs. It can also call tools (look at what's on your screen, and more to come) to actually do things, not just reply.
+- **Hold F8 to talk to an assistant** and it answers various things. It can also call tools (look at what's on your screen, and more to come) to actually do things, not just reply.
 - **Give your computer a voice.** Coding agents or other tools can speak to you through it.
 
-The first two jobs can lean on a local language model. The problem is that a local model has to think before it speaks, and that feels slow in a way a cloud API running on a rack of GPUs does not. On my laptop, the very first assistant turn was taking almost three seconds before a single word came back. By the sixth turn of a conversation it was closer to seven. That's death by a thousand milliseconds. It makes the whole thing feel broken even when it's working perfectly.
+The first two jobs can lean on a local language model. The problem is that a local model has to think before it speaks, and that feels slow in a way a cloud API running on a rack of GPUs does not. On my laptop, the very first assistant turn was taking almost three seconds before a single word came back. By the sixth turn of a conversation it was closer to seven. It makes the whole thing feel broken even when it's working perfectly.
 
 This post is the story of getting that first word out in about a third of a second instead. I will explain what actually costs the time, show you the bug I made (it's a good one) and give you the exact commands to reproduce everything on your own hardware. I don't do "trust me bro" benchmarks :)
 
@@ -48,7 +48,7 @@ Two takeaways set up the rest of the post. First, since the latency you feel is 
 
 The model's "understanding" of the prompt isn't thrown away after prefill. It lives in a chunk of memory called the **KV cache** (key/value cache, the name doesn't matter here). Think of it as the model's working memory of everything it has read so far.
 
-The insight that makes local models usable: **if the start of this turn's prompt is identical to last turn's, the model's working memory for that part is identical too. So don't recompute it, reuse it.** Snapshot that state and next turn restore the snapshot instead of prefilling from scratch. Restoring is basically a memory copy. In Fono it takes **15-40 milliseconds** regardless of size. Prefilling the same content cold can take **seconds** (the right lane in the animation above). That's the whole game.
+The insight that makes local models usable: **if the start of this turn's prompt is identical to last turn's, the model's working memory for that part is identical too. So don't recompute it, reuse it.** Snapshot that state and next turn restore the snapshot instead of prefilling from scratch. Restoring is basically a memory copy. In Fono it takes **15-40 milliseconds** regardless of size. Prefilling the same content cold can take **seconds** (the right lane in the animation above).
 
 There is one ironclad rule though, and it's where I shot myself in the foot.
 
@@ -62,7 +62,7 @@ I had it exactly backwards.
 
 ### The dumb bug
 
-There were several dumb bugs. The model got loaded twice at some point. And other where a bit more complex. I'll share an easy one so we can laugh together.
+There were several dumb bugs. The model got loaded twice at some point. And others were a bit more complex. I'll share an easy one so we can laugh together.
 
 Fono now ships with Google's Gemma as the default local model. Gemma's prompt format has no dedicated slot for system instructions like some models have, so when I first implemented it I glued the system prompt onto the current user turn:
 
@@ -132,7 +132,7 @@ To make the effect impossible to miss, I also swept the size of the cached prefi
 | 20 tools | 1,631 | 21,077 ms | 120 ms | 30.1 MB |
 | 40 tools | 3,251 | 44,806 ms | 133 ms | 60.0 MB |
 
-Read the last row twice. A cold prefill of a 3,251-token system prompt takes **45 seconds** on this modern CPU. The cached restore serves the first token in **133 ms** and the cost is a 60 MB snapshot sitting in RAM. A little memory for a lot of saved latency.
+A cold prefill of a 3,251-token system prompt takes **45 seconds** on this modern CPU. The cached restore serves the first token in **133 ms** and the cost is a 60 MB snapshot sitting in RAM. A little memory for a lot of saved latency.
 
 This is what makes local tool use feasible in the future. It's already on the [roadmap](https://github.com/bogdanr/fono/blob/main/ROADMAP.md) :)
 
@@ -152,11 +152,9 @@ One subtlety makes all this deleting safe. Each snapshot is a complete, standalo
 
 ### But is it actually faster than ollama?
 
-Here is where I have to be honest, because it's easy to lie with a chart.
-
 ollama is the popular way to run local models. It's built on the same engine (llama.cpp) that Fono uses. I imported the exact same model file into ollama and ran the exact same conversation over its local API, feeding its own replies back so its cache worked at its best.
 
-ollama is not naive. It has a server-side prefix cache too and it works. Its prefill stays roughly flat across the conversation instead of climbing. So this isn't "clever Fono vs. clueless ollama". It's a tool tuned for one job vs. a general-purpose server:
+ollama is not naive. It has a server-side prefix cache too and it works. Its prefill stays roughly flat across the conversation instead of climbing. The difference below comes from Fono being tuned for one job while ollama is a general-purpose server. But I think there is room for improvement in ollama :)
 
 | Turn | Fono cached first token | ollama first token | ollama prefill |
 |---:|---:|---:|---:|
@@ -228,7 +226,7 @@ I also did GPU runs and other older CPUs but let's keep it focused. Maybe at som
 2. **Cache reuse only works from the front.** Put the unchanging stuff (system prompt, tools) first and the new stuff last. Keep the prompt append-only.
 3. **Order is an architectural decision.** My slowest and fastest paths generated identical text in a different order. One reused everything, one reused nothing.
 4. **Know which phase is compute-bound and which is bandwidth-bound.** It tells you whether more cores, a better-compiled binary or faster RAM will actually help.
-5. **Warm the cache before the user needs it, and remember it costs RAM.** Startup is free time, spend it. Bound the cache so it can't eat the machine.
+5. **Warm the cache before the user needs it, and remember it costs RAM.** Bound the cache so it can't eat the machine.
 6. **Test the invariant, not just the output.** "Each turn's prompt is a prefix of the next" is a one-line property that would have caught my bug on day one.
 
 The cache work is committed. Next on the list is making sure the heavy prompt-building never fights the speech-to-text engine for CPU while you're mid-sentence. That's a scheduling problem for another post.
