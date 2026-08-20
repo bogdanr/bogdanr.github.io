@@ -2,86 +2,351 @@
 html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure,  footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {margin:0; padding:0; border:0; outline:0; font-size:100%; vertical-align:baseline; background:transparent;} body {line-height:1;} article,aside,details,figcaption,figure, footer,header,hgroup,menu,nav,section {display:block;} nav ul, nav ol {list-style:none;} blockquote, q {quotes:none;} blockquote:before, blockquote:after, q:before, q:after {content:''; content:none;} a {margin:0; padding:0; font-size:100%; vertical-align:baseline; background:transparent;} ins {background-color:#ff9; color:#000; text-decoration:none;} mark {background-color:#ff9; color:#000; font-style:italic; font-weight:bold;} del {text-decoration: line-through;} abbr[title], dfn[title] {border-bottom:1px dotted; cursor:help;} table {border-collapse:collapse; border-spacing:0;} hr {display:block; height:1px; border:0; margin:1em 0; padding:0;} input, select {vertical-align:middle;}
 
 
-/*   MAIN STYLES   */
-html {background: #FCFCFC; color: #333; font-family: 'PT Sans',sans-serif; height: 100%;}
-body {height: 100%; margin: 0 auto; max-width: 978px; padding: 10px}
-a, #skills dl dd {-webkit-transition: all 0.15s ; -moz-transition: all 0.15s ; -ms-transition: all 0.15s ; -o-transition: all 0.15s ; transition: all 0.15s ;}
+/*   MAIN STYLES
 
+     This keeps the original design language: warm off-white page, monochrome
+     grey with a single green interactive accent, dense grey tag pills, a
+     full-width role bar, and section headings marked by a grey left bar.
 
-img.grayscale {
-    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale"); /* Firefox 10+, Firefox on Android */
-    filter: gray; /* IE6-9 */
-    -webkit-filter: grayscale(100%); /* Chrome 19+, Safari 6+, Safari 6+ iOS */
+     PT Sans is self-hosted rather than loaded from Google Fonts. The original
+     link requested only the 'latin' subset, which stops at U+00FF and so has no
+     glyph for the 'a-breve' in Radulescu; the browser silently substituted a
+     fallback face for that one character. Both the latin and latin-ext subsets
+     are now served from ./fonts, which fixes the diacritics, removes the last
+     third-party request, and keeps the page working offline and in print.     */
+@font-face {font-family: 'PT Sans'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('fonts/ptsans-latin_400.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family: 'PT Sans'; font-style: normal; font-weight: 400; font-display: swap;
+  src: url('fonts/ptsans-latin-ext_400.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+@font-face {font-family: 'PT Sans'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url('fonts/ptsans-latin_700.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face {font-family: 'PT Sans'; font-style: normal; font-weight: 700; font-display: swap;
+  src: url('fonts/ptsans-latin-ext_700.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;}
+:root {
+  --sans: 'PT Sans', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "DejaVu Sans", Arial, sans-serif;
+  --green: #009000;
 }
+html {background: #FCFCFC; color: #333; font-family: var(--sans); height: 100%;}
+body {height: 100%; margin: 0 auto; max-width: 978px; padding: 10px;}
+a, #skills dd span {transition: all 0.15s;}
+a {color: #333;}
+a:hover {color: var(--green);}
 
-img.grayscale:hover {
-    filter: none;
-    -webkit-filter: grayscale(0%);
-}
+img.avatar {float: right; width: 200px; border-radius: 40%;}
+img.grayscale {-webkit-filter: grayscale(100%); filter: grayscale(100%);}
+img.grayscale:hover {-webkit-filter: grayscale(0%); filter: none;}
+
 
 /*   HEADER   */
 header.vcard {margin-bottom: 10px; overflow: hidden;}
 .fn {font-size: 2.7em; font-weight: bold; padding: 5px 0 5px 10px;}
-.role {background: #999; color: #FCFCFC; font-weight: normal; margin: 4px 0 13px; padding: 5px 5px 5px 10px; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow:  0px 1px 1px 0px rgba(0, 0, 0, 0.35);  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.15);}
-.role:hover {background: #009000;}
-.contact {list-style: none; margin-bottom: 15px; overflow: hidden;}
-.contact li {border-right: 1px solid #ccc; display: inline; float: left; font-size: 0.8em; padding: 2px 0; text-align: center; width: 16.5%; overflow: hidden}
-.contact li:last-child {border: none;}
+.role {display: block; background: #999; color: #FCFCFC; font-size: 1em; font-weight: normal; margin: 4px 0 13px; padding: 5px 5px 5px 10px; border-radius: 5px; box-shadow: 0 1px 1px 0 rgba(0,0,0,0.15); transition: background-color 0.2s;}
+.role:hover {background: var(--green);}
+/* Flex, not the original's 16.5% widths: the contact row has grown from six
+   items to seven and fixed widths overflowed. The divider look is preserved. */
+.contact {list-style: none; display: flex; flex-wrap: wrap; margin-bottom: 15px; margin-left: 10px;}
+.contact li {display: flex; align-items: center; gap: 6px; border-right: 1px solid #ccc; font-size: 0.8em; padding: 2px 14px 2px 0; margin-right: 14px;}
+.contact li:last-child {border: none; margin-right: 0;}
 .contact a {color: #000; text-decoration: none;}
-.contact a:hover {background-color: #eee;}
-.contact:hover i {color: #009000;}
-.contact a.map-tooltip span {display: none;}
-.contact a.map-tooltip:hover span{ display:inline; position:absolute; color:#111; border:1px solid #DCA; background:#fffAF0;} .callout {z-index:20;position:absolute;top:30px;border:0;left:-12px;} /*CSS3 extras*/ a.map-tooltip span { -moz-box-shadow: 5px 5px 8px #CCC; -webkit-box-shadow: 5px 5px 8px #CCC; box-shadow: 5px 5px 8px #CCC; }
+.contact a:hover {background-color: #eee; color: var(--green);}
+.contact:hover i {color: var(--green);}
 
 
 /*   CONTENT   */
-section {font-size: 0.9em; margin: 30px 0; overflow: hidden; }
+section {font-size: 0.9em; margin: 30px 0; overflow: hidden;}
 section h1 {border-left: 2px solid #DDD; font-size: 1.25em; margin-bottom: 10px; padding-left: 5px; text-transform: uppercase;}
 section p {line-height: 1.5em; padding: 0 20px 5px;}
 
-#skills dl {margin-left: 15px;}
-#skills dl dt {clear: left; display: inline; float: left; margin: 10px 5px 10px 0; padding: 2px; text-align: right; width: 150px;}
-#skills dl dd {background: #dfdfdf; display: inline; float: left; font-size: 0.8em; margin: 10px 4px; padding: 4px; -webkit-border-radius: 5px; border-radius: 5px; -webkit-box-shadow:  0px 1px 1px 0px rgba(0, 0, 0, 0.35);  box-shadow:  0px 1px 1px 0px rgba(0, 0, 0, 0.35); cursor: default}
-#skills dl dd:hover {background-color: #ccc; -webkit-box-shadow: inset 0px 2px 1px 1px rgba(0, 0, 0, 0.15); box-shadow: inset 0px 2px 1px 1px rgba(0, 0, 0, 0.15); }
 
-#experience article {margin: 15px 0 37px 95px; padding-left: 5px; position: relative; border: 1px solid #FCFCFC}
-#experience article:last-child {margin-bottom: 0}
-#experience article:hover {border: 1px dotted #ddd; background: #fefefe}
+/*   BULLETED LISTS: highlights, how I work, writing, interests
+     Indented and circle-marked, matching the original interests list.   */
+#highlights ul, #howiwork ul, #writing ul, #hobbies ul {margin-left: 20px; padding: 0;}
+#highlights li, #howiwork li, #writing li, #hobbies li {margin: 10px 0; padding: 0; line-height: 1.5em; list-style: circle inside none;}
+#highlights li:hover, #howiwork li:hover, #writing li:hover, #hobbies li:hover {list-style: disc inside none;}
+#writing .date {color: #777; font-size: 0.9em;}
+#hobbies li a {color: #555;}
+
+
+/*   SKILLS / CAPABILITIES
+     Right-aligned label in a 150px column, then dense grey pills that flow
+     across the full width and wrap back to the left margin, exactly as in the
+     original. `dd.tags` is inline so its pills participate in that flow rather
+     than being boxed into a column; `dd.prose` is for the two groups that are
+     genuinely sentences and read badly as pills.   */
+#skills dl {margin-left: 15px;}
+#skills dl dt {clear: left; float: left; width: 150px; margin: 10px 5px 10px 0; padding: 2px; text-align: right; font-weight: bold;}
+/* Each group is its own block, so its pills cannot bleed into the next group,
+   while inline content still flows around the floated label: the first row
+   indents past the label and later rows use the full width. That keeps the
+   original's density without the ambiguity of a single continuous flow. */
+#skills dl dd.tags {display: block; margin: 0 0 2px; padding: 0; background: none;}
+#skills dl dd.tags span {display: inline-block; background: #dfdfdf; font-size: 0.8em; margin: 10px 4px 0 0; padding: 4px 6px; border-radius: 5px; box-shadow: 0 1px 1px 0 rgba(0,0,0,0.35); cursor: default; line-height: 1.35;}
+#skills dl dd.tags span:hover {background: #ccc; box-shadow: inset 0 2px 1px 1px rgba(0,0,0,0.15);}
+#skills dl dd.tags span b {font-weight: bold;}
+#skills dl dd.prose {display: block; margin: 10px 0 12px 170px; padding: 0; line-height: 1.5em; background: none;}
+#skills dl dd.prose b {font-weight: bold;}
+
+
+/*   EXPERIENCE   */
+#experience article {margin: 15px 0 37px 95px; padding-left: 5px; position: relative; border: 1px solid #FCFCFC;}
+#experience article:last-child {margin-bottom: 0;}
+#experience article:hover {border: 1px dotted #ddd; background: #fefefe;}
 #experience article h1 {border: none; font-size: 1.2em; font-style: italic; font-weight: bold; padding: 0; text-transform: none;}
-#experience article h1 a {color: #333; text-decoration: none}
-#experience article h1 a:hover {background-color: #333; color: #eee} 
-#experience article h1 span {color: #777; font-size: 0.8em; font-weight: normal;}
-#experience article h2 {background: #eee; display: inline; font-size: 0.9em; font-weight: normal; padding: 3px;}
-#experience article .start, #experience article .end {background: #fff; border-top: 1px dashed #ddd; font-size: 0.75em; left: -80px; padding: 4px 0; position: absolute; text-align: center; top: 19px; width: 60px;}
-#experience article .end {top: 0; border: none}
+#experience article h1 a {color: #333; text-decoration: none;}
+#experience article h1 a:hover {background-color: #333; color: #eee;}
+#experience article h1 span {color: #777; font-size: 0.8em; font-weight: normal; font-style: normal;}
+#experience article h2 {background: #eee; display: inline-block; font-size: 0.9em; font-weight: normal; padding: 3px;}
+/* Start date above end date. The original stylesheet had these inverted, which
+   rendered as "Present" above "April 2010". */
+#experience article .start, #experience article .end {background: #fff; font-size: 0.75em; left: -80px; padding: 4px 0; position: absolute; text-align: center; width: 60px;}
+#experience article .start {top: 0; border: none;}
+#experience article .end {top: 19px; border-top: 1px dashed #ddd;}
 #experience article p {font-size: 0.9em; line-height: 22px; margin: 10px 0 0; padding-left: 0;}
 
-#education h2 {padding-left: 20px;}
+
+/*   ENGAGEMENT PORTFOLIO   */
+.portfolio {list-style: none; margin: 15px 0 0; padding: 0;}
+/* Each engagement is a hover target in its own right. The left bar is always
+   present but transparent, so the highlight cannot shift the text. */
+.portfolio > li {margin: 0 0 20px -10px; padding: 2px 0 2px 8px; border-left: 2px solid transparent; transition: border-color 0.15s, background-color 0.15s;}
+.portfolio > li:hover {border-left-color: #ddd; background: #fafafa;}
+.portfolio > li:last-child {margin-bottom: 0;}
+.portfolio h3 {font-size: 1.05em; font-weight: bold; margin: 0;}
+.portfolio h3 a {color: #333; text-decoration: none;}
+.portfolio h3 a:hover {background-color: #333; color: #eee;}
+.portfolio .sector {color: #777; font-size: 0.8em; font-weight: normal;}
+.portfolio .sector:before {content: "\00a0\00b7\00a0"; color: #bbb;}
+.portfolio .dur {background: #eee; border-radius: 5px; color: #555; font-size: 0.75em; font-weight: normal; margin-left: 7px; padding: 2px 6px; white-space: nowrap;}
+#experience .portfolio p {font-size: 0.9em; line-height: 21px; margin: 6px 0 0;}
+#experience .portfolio p em {font-style: normal; font-weight: bold;}
+
+
+/*   OPEN SOURCE / LANGUAGES   */
+#opensource dl, #languages dl {margin: 0 0 0 20px;}
+#opensource dl dt, #languages dl dt {clear: both; float: none; width: auto; margin: 12px 0 3px; padding: 0; text-align: left; font-weight: bold;}
+#opensource dl dt:first-of-type, #languages dl dt:first-of-type {margin-top: 0;}
+#opensource dl dd, #languages dl dd {display: block; float: none; width: auto; margin: 0; padding: 0; background: none; box-shadow: none; font-size: 1em; line-height: 1.5em;}
+#opensource dl dd em {font-style: normal; font-weight: bold;}
+#opensource > p:last-of-type {margin-top: 12px;}
+
+
+/*   EDUCATION   */
+#education h2 {font-size: 1em; font-weight: bold; padding-left: 20px;}
 #education p {padding-top: 5px;}
 
-#hobbies ul {font-size: 0.9em; margin-left: 20px;}
-#hobbies ul li {margin: 10px 0; list-style: circle inside none; cursor: default}
-#hobbies ul li:hover {list-style: disc inside none;}
-#hobbies ul li a {color: #555}
-#hobbies ul li a:hover {background-color: #555; color: #eee; text-decoration: none}
 
+/*   CERTIFICATIONS
+     Floated, not inline-block: inline-block pairs are separated by collapsible
+     whitespace, which pushed the pair past 100% and broke name/date pairing. */
+#certifications h2 {clear: left; float: left; width: 62%; font-size: 1em; font-weight: normal; padding: 3px 0 3px 20px; box-sizing: border-box;}
+#certifications p {float: left; width: 38%; padding: 3px 0; color: #777; font-size: 0.9em;}
+#certifications:after {content: ""; display: block; clear: both;}
+
+
+/*   LANGUAGES   */
+#languages p strong {font-weight: bold;}
+
+
+/*   PDF / PRINT BUTTON   */
+.pdf-button {float: right; margin: 10px 0 0; padding: 7px 14px; font-family: inherit; font-size: 0.8em; color: #FCFCFC; background: #999; border: 0; border-radius: 5px; box-shadow: 0 1px 1px 0 rgba(0,0,0,0.15); cursor: pointer; transition: background-color 0.2s;}
+.pdf-button:hover {background: var(--green);}
 
 
 /* MEDIA QUERIES */
-@media screen and (max-width:768px) {
+@media screen and (max-width: 900px) {
+  #summary img {width: 150px !important; height: 150px !important;}
+}
+
+@media screen and (max-width: 768px) {
   .contact li {font-size: 0.7em;}
 }
 
-@media screen and (max-width:680px) {
-  #skills dl dt {display: block; float: none; margin: 0; text-align: left;}
+@media screen and (max-width: 680px) {
+  #skills dl {margin-left: 0;}
+  #skills dl dt {display: block; float: none; width: auto; margin: 14px 0 4px; text-align: left;}
+  #skills dl dd.prose {margin-left: 0;}
 }
 
-@media screen and (max-width:500px) {
-  .contact li {border-right: medium none; display: block; float: none; font-size: 1em; overflow: hidden; padding: 6px 10px; text-align: left; width: auto;}
+@media screen and (max-width: 560px) {
+  .contact li {border-right: none; display: flex; font-size: 0.9em; padding: 5px 0; margin-right: 0; width: 100%;}
+  #summary img {float: none !important; display: block; margin: 0 auto 10px;}
 }
 
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
   #experience article {margin: 40px 0 37px;}
-  #experience article .start, #experience article .end {left: 0; top: -25px; border: none; border-right: 1px dashed #ddd;}
-  #experience article .end {left: 61px; top: -25px; border: none}
+  #experience article .start, #experience article .end {left: 0; top: -25px; border: none; border-right: 1px dashed #ddd; text-align: left; background: none;}
+  #experience article .end {left: 61px; top: -25px; border: none;}
+  #certifications h2, #certifications p {float: none; width: auto; padding-left: 0;}
+}
+
+
+/*   PRINT / PDF
+     Drives the "Download PDF" button. It calls window.print(), so the browser's
+     own PDF engine does the work: real text, live hyperlinks, selectable and
+     ATS-parsable output, zero JavaScript. Deliberately not html2pdf or
+     html2canvas, which rasterise the page and leave an ATS nothing to read.
+
+     This is the same design as the screen, set for paper: the grey role bar,
+     the grey left bar on section heads, the tag pills, the chip labels and the
+     date gutter all survive. What changes is what has to change for a page that
+     is 210mm wide and cut every 297mm: type in points, tighter leading, and
+     break rules so nothing is sliced in half at a page boundary.   */
+@media print {
+  @page {size: A4; margin: 12mm 11mm 12mm;}
+
+  /* Browsers drop backgrounds and colours when printing to save ink. Here the
+     greys ARE the design, so they are forced back on. */
+  *, *:before, *:after {-webkit-print-color-adjust: exact !important; print-color-adjust: exact !important;}
+
+  /* The screen rules set height:100% and overflow:hidden, which clip paged
+     media to a single page. Both must be released for print. */
+  html, body {height: auto !important; max-width: none !important; overflow: visible !important;}
+  section {overflow: visible !important;}
+
+  html {background: #FCFCFC; color: #333; font-size: 10pt;}
+  body {max-width: none; margin: 0; padding: 0; font-family: var(--sans);
+        font-size: 9.4pt; line-height: 1.4; orphans: 2; widows: 2;
+        font-kerning: normal; text-rendering: optimizeLegibility;}
+  p, li, dd {orphans: 2; widows: 2;}
+
+  /* Screen-only chrome. The Font Awesome icons come from a CDN and would be
+     empty boxes on an offline print, so the contact list loses them. */
+  .pdf-button, .contact i {display: none !important;}
+  a {color: #333; text-decoration: none;}
+
+  /*   HEADER
+       Name, then the full-width grey role bar exactly as on screen: it is the
+       single strongest element of the design and the one thing that makes the
+       page recognisably this site rather than a generic CV template. */
+  header.vcard {margin-bottom: 8pt; page-break-after: avoid; break-after: avoid;}
+  .fn {font-size: 22pt; font-weight: bold; line-height: 1.1; padding: 0 0 2pt 5pt; margin: 0;}
+  .role {display: block; background: #999 !important; color: #FCFCFC !important;
+         font-size: 9.5pt; font-weight: normal; border-radius: 4pt;
+         box-shadow: 0 0.5pt 0.5pt 0 rgba(0,0,0,0.15);
+         margin: 2pt 0 7pt; padding: 3.5pt 5pt 3.5pt 7pt;}
+  .contact {display: flex; flex-wrap: wrap; margin: 0 0 4pt 5pt; padding: 0;}
+  .contact li {display: flex; align-items: center; border-right: 0.5pt solid #ccc;
+               font-size: 7.6pt; padding: 1pt 8pt 1pt 0; margin-right: 8pt; color: #000;}
+  .contact li:last-child {border: none; margin-right: 0;}
+  .contact a {color: #000;}
+
+  /*   SECTIONS
+       Grey left bar on an uppercase head, and the same indented text column as
+       the screen. Slightly darker bar than #DDD: a 2pt hairline of #DDD is
+       nearly invisible on paper, where the screen shows it backlit. */
+  section {font-size: 9.4pt; margin: 0 0 9pt; padding: 0;}
+  section h1 {font-size: 10.5pt; text-transform: uppercase; color: #333;
+              border-left: 2.5pt solid #bbb; margin: 0 0 5pt; padding: 0 0 0 5pt;
+              page-break-after: avoid; break-after: avoid;}
+  section p {line-height: 1.4; padding: 0 0 3pt 12pt; margin: 0;}
+
+  /* Portrait keeps the rounded frame and the greyscale of the screen. */
+  #summary img {float: right; width: 100pt; height: 100pt; border-radius: 40%;
+                margin: 0 0 6pt 12pt;
+                filter: grayscale(100%) !important; -webkit-filter: grayscale(100%) !important;}
+
+  /*   BULLETED LISTS: circle markers, as on screen   */
+  #highlights ul, #howiwork ul, #writing ul, #hobbies ul {margin: 0 0 0 16pt; padding: 0;}
+  #highlights li, #howiwork li, #writing li, #hobbies li {margin: 0 0 4pt; padding: 0;
+      line-height: 1.4; list-style: circle inside none;
+      page-break-inside: avoid; break-inside: avoid;}
+  #writing .date {color: #777; font-size: 8pt;}
+  #hobbies li a {color: #555;}
+
+  /*   CAPABILITIES
+       The pills stay. They cost a little ink and a little height, but they are
+       the visual signature of this section, and the text inside them is still
+       plain selectable text, so an ATS reads it exactly as it would a list. */
+  /* Grid rather than the screen's float: a floated label that lands at the
+     foot of a page is left stranded there while its pills start the next page,
+     and Chrome ignores break-after on floats. A grid row cannot be split that
+     way, and it also lines the pills up in a clean column, which reads better
+     on paper than the screen's wrap-back-to-the-margin flow. */
+  #skills dl {display: grid; grid-template-columns: 105pt 1fr; column-gap: 7pt;
+              align-items: start; margin: 0 0 0 5pt; overflow: visible;}
+  #skills dl dt {float: none; clear: none; grid-column: 1; width: auto;
+                 margin: 6pt 0 0; padding: 1pt 0 0;
+                 text-align: right; font-size: 8.4pt; font-weight: bold;}
+  #skills dl dd.tags, #skills dl dd.prose {grid-column: 2; display: block; margin: 0 0 1pt; padding: 0;
+                                           background: none;}
+  #skills dl dd.tags span {display: inline-block; background: #dfdfdf !important; color: #333;
+                           font-size: 7.6pt; line-height: 1.3; margin: 6pt 3pt 0 0;
+                           padding: 2pt 4pt; border-radius: 4pt;
+                           box-shadow: 0 0.5pt 0.5pt 0 rgba(0,0,0,0.3);}
+  #skills dl dd.tags span:after {content: "";}
+  #skills dl dd.prose {margin: 6pt 0 4pt; font-size: 8.6pt; line-height: 1.4;}
+  #skills dl dt, #skills dl dd {page-break-inside: avoid; break-inside: avoid;}
+
+  /*   EXPERIENCE
+       The date gutter is kept, absolutely positioned exactly as on screen. It
+       sits at the top of each article, so it survives an article that breaks
+       across pages, and it is what gives the section its timeline shape. */
+  #experience article {position: relative; margin: 0 0 11pt 72pt; padding: 0 0 0 5pt;
+                       border: none !important; background: none !important;
+                       page-break-inside: avoid; break-inside: avoid;}
+  /* The practice article holds the whole portfolio and is far taller than a
+     page, so it must be allowed to break; its list items stay intact. */
+  #experience article.practice {page-break-inside: auto; break-inside: auto;}
+  #experience article h1 {border: none; font-size: 10.5pt; font-style: italic; font-weight: bold;
+                          padding: 0; margin: 0; text-transform: none;
+                          page-break-after: avoid; break-after: avoid;}
+  #experience article h1 span {color: #777; font-size: 8pt; font-weight: normal; font-style: normal;}
+  #experience article h2 {display: inline-block; background: #eee !important; color: #333;
+                          font-size: 8.4pt; font-weight: normal; margin: 2pt 0 0; padding: 2pt 3pt;}
+  #experience article .start, #experience article .end {position: absolute; left: -66pt; width: 58pt;
+      display: block; background: #fff !important; font-size: 7.4pt; color: #333;
+      padding: 3pt 0; text-align: center;}
+  #experience article .start {top: 0; border: none;}
+  #experience article .end {top: 15pt; border-top: 0.5pt dashed #ccc;}
+  #experience article p {font-size: 8.8pt; line-height: 1.4; margin: 4pt 0 0; padding: 0;}
+
+  /*   ENGAGEMENT PORTFOLIO   */
+  .portfolio {list-style: none; margin: 7pt 0 0; padding: 0;}
+  #experience .portfolio > li {margin: 0 0 8pt -8pt; padding: 0 0 0 8pt;
+                               border: none !important; background: none !important;
+                               page-break-inside: avoid; break-inside: avoid;}
+  #experience .portfolio h3 {font-size: 9.6pt; font-weight: bold; margin: 0;
+                             page-break-after: avoid; break-after: avoid;}
+  .portfolio .sector {color: #777; font-size: 7.8pt; font-weight: normal;}
+  .portfolio .sector:before {content: "\00a0\00b7\00a0"; color: #bbb;}
+  .portfolio .dur {background: #eee !important; border-radius: 4pt; color: #555; font-size: 7.4pt;
+                   font-weight: normal; margin-left: 5pt; padding: 1.5pt 4pt; white-space: nowrap;}
+  #experience .portfolio p {font-size: 8.8pt; line-height: 1.4; margin: 3pt 0 0;}
+  #experience .portfolio p em {font-style: normal; font-weight: bold;}
+
+  /*   OPEN SOURCE / LANGUAGES   */
+  #opensource dl, #languages dl {margin: 0 0 0 16pt;}
+  #opensource dl dt, #languages dl dt {clear: both; float: none; width: auto; margin: 5pt 0 1pt;
+                                       padding: 0; text-align: left; font-weight: bold; font-size: 9pt;}
+  #opensource dl dt:first-of-type, #languages dl dt:first-of-type {margin-top: 0;}
+  #opensource dl dd, #languages dl dd {display: block; float: none; width: auto; margin: 0; padding: 0;
+                                       background: none; box-shadow: none;
+                                       font-size: 8.8pt; line-height: 1.4;}
+  #opensource dl dt, #opensource dl dd {page-break-inside: avoid; break-inside: avoid;}
+  #opensource dl dt {page-break-after: avoid; break-after: avoid;}
+  #opensource dl dd em {font-style: normal; font-weight: bold;}
+  #opensource > p:last-of-type {margin-top: 6pt;}
+
+  /*   EDUCATION   */
+  #education h2 {font-size: 9.2pt; font-weight: bold; margin: 5pt 0 0; padding-left: 16pt;}
+  #education h2:first-of-type {margin-top: 0;}
+  #education p {font-size: 8.6pt; color: #555; padding: 0 0 0 16pt;}
+
+  /*   CERTIFICATIONS: name and date on one line, as on screen   */
+  #certifications h2 {clear: left; float: left; width: 62%; padding: 1.5pt 0 1.5pt 16pt;
+                      font-size: 9pt; font-weight: normal; box-sizing: border-box;}
+  #certifications p {float: left; width: 38%; padding: 1.5pt 0; font-size: 8.4pt; color: #777;}
+  #certifications:after {content: ""; display: block; clear: both;}
+
+  /*   LANGUAGES   */
+  #languages p strong {font-weight: bold;}
+
+  /* Keep the evidence: paper has no clickable links, so the destinations that
+     are themselves the claim get printed. */
+  #writing a[href^="http"]:after, #opensource a[href^="http"]:after {
+      content: " (" attr(href) ")"; font-size: 7pt; color: #666; word-break: break-all;}
 }
